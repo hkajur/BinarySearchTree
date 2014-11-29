@@ -5,9 +5,22 @@
 
 using namespace std;
 
+// QUIT will be a constant variable so if I decided to change
+// the value of quit from 4 to 5, it will be easier
+
 const int QUIT = 4;
 
-void insertNode(btree * root, int value){
+// Defining functions to be later used in program
+
+void insertTree(btree * root, int value);
+bool searchTree(btree * root, int value);
+void deleteNode(btree * root, int value);
+
+btree * buildTree(string * in);
+void inOrderTraversal(btree * root);
+void showMainMenu();
+
+void insertTree(btree * root, int value){
   
     // For the case where the root value is the same as the input value 
     // In BST there needs to be no duplicate values
@@ -19,49 +32,13 @@ void insertNode(btree * root, int value){
         if(root->getRight() == NULL)
             root->setRight(new btree(value));
         else
-            insertNode(root->getRight(), value); 
+            insertTree(root->getRight(), value); 
     }
     else {
         if(root->getLeft() == NULL)
             root->setLeft(new btree(value));
         else
-            insertNode(root->getLeft(), value);
-    }
-}
-
-btree * buildTree(string * in){
-
-    int data;
-
-    btree * root;
-
-    stringstream ss;
-    
-    ss << (*in);
-
-    if(ss.good()){
-    
-        ss >> data;
-
-        root = new btree(data); 
-
-        while(ss.good()){
-            ss >> data;
-            insertNode(root, data);
-        }
-
-    } else {
-        cout << "No value from the input" << endl;
-    }
-
-    return root;
-}
-
-void inOrderTraversal(btree * root){
-    if(root != NULL){
-        inOrderTraversal(root->getLeft());
-        cout << root->getValue()  << " " ;
-        inOrderTraversal(root->getRight());
+            insertTree(root->getLeft(), value);
     }
 }
 
@@ -83,6 +60,43 @@ bool searchTree(btree * root, int value){
         return searchTree(root->getLeft(), value);
     }
 }
+
+btree * buildTree(string * in){
+
+    int data;
+
+    btree * root;
+
+    stringstream ss;
+    
+    ss << (*in);
+
+    if(ss.good()){
+    
+        ss >> data;
+
+        root = new btree(data); 
+
+        while(ss.good()){
+            ss >> data;
+            insertTree(root, data);
+        }
+
+    } else {
+        cout << "No value from the input" << endl;
+    }
+
+    return root;
+}
+
+void inOrderTraversal(btree * root){
+    if(root != NULL){
+        inOrderTraversal(root->getLeft());
+        cout << root->getValue()  << " " ;
+        inOrderTraversal(root->getRight());
+    }
+}
+
 
 void showMainMenu(){
     cout << endl;
@@ -116,12 +130,17 @@ int main(int argc, char* argv[]){
     cout << "Please enter one of the following options: ";
     cin >> option;
 
+    int op;
     while(option != QUIT){
         
         if(option == 1){
             cout << "Values inside the tree: " << endl;
             inOrderTraversal(root);
             cout << endl;
+            
+            cout << "Enter 0 to return to main menu: ";
+            cin >> op; 
+
         } else if(option == 2){
    
             int item;
@@ -132,13 +151,19 @@ int main(int argc, char* argv[]){
                 cout << item << " is inside the tree" << endl;
             else
                 cout << item << " is not inside the tree" << endl;
+            
+            cout << "Enter 0 to return to main menu: ";
+            cin >> op; 
 
         } else if(option == 3){
             int item;
             cout << "Enter value to insert: ";
             cin >> item;
 
-            insertNode(root, item);
+            insertTree(root, item);
+            
+            cout << "Enter 0 to return to main menu: ";
+            cin >> op; 
         } else {
             option = QUIT;
         }
