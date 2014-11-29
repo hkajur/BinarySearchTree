@@ -12,29 +12,19 @@ void insertNode(btree * root, int value){
         return;
 
 
-    if(root->hasNullPointers()){
-       
-        if(value > root->getValue()){
+    if(value > root->getValue()){
 
-            if(root->getRight() == NULL)
-                root->setRight(new btree(value));
-            else
-                insertNode(root->getRight(), value); 
-        }
-        else {
-        
-            if(root->getLeft() == NULL)
-                root->setLeft(new btree(value));
-            else
-                insertNode(root->getLeft(), value);
-        }
-    } else {
-        
-        if(value > root->getValue())
-            insertNode(root->getRight(), value);
-        else 
+        if(root->getRight() == NULL)
+            root->setRight(new btree(value));
+        else
+            insertNode(root->getRight(), value); 
+    }
+    else {
+    
+        if(root->getLeft() == NULL)
+            root->setLeft(new btree(value));
+        else
             insertNode(root->getLeft(), value);
-
     }
 }
 
