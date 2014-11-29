@@ -12,7 +12,14 @@ class btree {
         btree();
         btree(int value);
         btree(btree * l, btree * r);
-        
+       
+        void setLeft(btree * l);
+        void setRight(btree * l);
+
+        btree * getLeft();
+        btree * getRight();
+
+        bool hasNullPointers();
         int getValue();
 };
 
