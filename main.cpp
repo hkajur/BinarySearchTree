@@ -172,5 +172,7 @@ int main(int argc, char* argv[]){
         cout << "Please enter one of the following options: ";
         cin >> option;
     }
+
+    delete root;
     return 0;
 }

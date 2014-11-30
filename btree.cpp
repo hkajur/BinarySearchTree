@@ -21,6 +21,12 @@ btree::btree(btree * l, btree * r){
     setRight(r);
 }
 
+btree::~btree(){
+    if(this->left != NULL)
+        delete this->left;
+    if(this->right != NULL)
+        delete this->right;
+}
 int btree::getValue(){
     return this->value;
 }

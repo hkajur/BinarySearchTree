@@ -12,7 +12,9 @@ class btree {
         btree();
         btree(int value);
         btree(btree * l, btree * r);
-       
+
+        ~btree();
+
         void setLeft(btree * l);
         void setRight(btree * l);
 
