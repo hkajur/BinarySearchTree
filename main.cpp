@@ -110,7 +110,7 @@ btree * buildTree(string * in){
 
     int data;
 
-    btree * root;
+    btree * root = NULL;
 
     stringstream ss;
     
@@ -186,7 +186,15 @@ int main(int argc, char* argv[]){
    
     // Creates the tree based on the string that we got from user
     btree * root = buildTree(&line);
-    cout << "Built the tree" << endl;
+
+    // Check if the tree has been built
+    // If root returns NULL that means the tree built was unsuccessful
+    if(root == NULL){
+        cout << "Tree not built" << endl;
+        return 1;
+    }
+    
+    cout << "Tree has been successfully built" << endl;
 
     do {
         
