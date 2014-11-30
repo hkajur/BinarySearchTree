@@ -10,17 +10,30 @@ using namespace std;
 
 const int QUIT = 4;
 
-// Defining functions to be later used in program
+// Declaring functions to be later used in program
 
-void insertTree(btree * root, int value);
+void insertNode(btree * root, int value);
 bool searchTree(btree * root, int value);
 void deleteNode(btree * root, int value);
-
 btree * buildTree(string * in);
 void inOrderTraversal(btree * root);
 void showMainMenu();
 
-void insertTree(btree * root, int value){
+// Defining functions
+
+/*
+ * insertNode function
+ * ===================
+ * Takes in two arguments 
+ *      root which of type btree pointer
+ *      value which is of type integer
+ * Inserts a new btree with the given value
+ * Recursively insert the new node somewhere in the tree
+ * Where the location of the new created node depends on its value
+ *
+ */
+
+void insertNode(btree * root, int value){
   
     // For the case where the root value is the same as the input value 
     // In BST there needs to be no duplicate values
@@ -28,19 +41,43 @@ void insertTree(btree * root, int value){
     if(value == root->getValue())
         return;
 
+    /* 
+     *  If the passed value is greater than the root value of tree
+     *  Then insert the node to the right of the tree 
+     *  if the right pointer is empty
+     *  Otherwise make a recursive call
+     *  If the passed value is lower than root value of tree
+     *  Then insert node to the left of the tree
+     *  If the left pointer is empty
+     *  Then make a recursive call
+     */
+
     if(value > root->getValue()){
         if(root->getRight() == NULL)
             root->setRight(new btree(value));
         else
-            insertTree(root->getRight(), value); 
+            insertNode(root->getRight(), value); 
     }
     else {
         if(root->getLeft() == NULL)
             root->setLeft(new btree(value));
         else
-            insertTree(root->getLeft(), value);
+            insertNode(root->getLeft(), value);
     }
 }
+
+/*
+ * searchTree function
+ * ===================
+ * Takes in two arguments 
+ *      root which of type btree pointer
+ *      value which is of type integer
+ * First check if given root is NULL,
+ * if it is NULL, return false
+ * Otherwise, check if the value inside root node
+ * is the same as the value, if they are same, then return true
+ * Otherwise recursively check the child nodes of the tree
+ */
 
 bool searchTree(btree * root, int value){
   
@@ -53,13 +90,21 @@ bool searchTree(btree * root, int value){
     if(root->getLeft() == NULL && root->getRight() == NULL)
         return false;
 
-
-    if(value > root->getValue()){
+    if(value > root->getValue())
         return searchTree(root->getRight(), value);
-    } else {
+    else 
         return searchTree(root->getLeft(), value);
-    }
 }
+
+/*
+ * buildTree function
+ * ==================
+ * Takes in a argument which is pointer to string
+ * First gets the first integer in the string
+ * Makes that the root of the tree and then
+ * Splits the string by spaces and loops through
+ * each integer and inserts that integer into the tree
+ */
 
 btree * buildTree(string * in){
 
@@ -79,7 +124,7 @@ btree * buildTree(string * in){
 
         while(ss.good()){
             ss >> data;
-            insertTree(root, data);
+            insertNode(root, data);
         }
 
     } else {
@@ -89,6 +134,16 @@ btree * buildTree(string * in){
     return root;
 }
 
+/*
+ * inOrderTraversal function
+ * =========================
+ * Checks if root is null or not
+ * If it is not null, calls the function again recursively
+ * so it will go to the deepest left node, and then prints
+ * the data inside the deepest left node
+ * Then it will go to the deepest right node and prints it
+ */
+
 void inOrderTraversal(btree * root){
     if(root != NULL){
         inOrderTraversal(root->getLeft());
@@ -97,6 +152,11 @@ void inOrderTraversal(btree * root){
     }
 }
 
+/*
+ * showMainMenu function
+ * =====================
+ * Prints the menu and the options for the end user
+ */
 
 void showMainMenu(){
     cout << endl;
@@ -116,22 +176,24 @@ int main(int argc, char* argv[]){
  
     string line;
     int option;
-    
-    cout << "Enter values for the BST: " << endl;
+    int op;
+   
+    // Asks the user to input the values for BST followed by newline
+    // to signal that there are no more values to add
 
+    cout << "Enter values for the BST: " << endl;
     getline(cin, line);
-    
+   
+    // Creates the tree based on the string that we got from user
     btree * root = buildTree(&line);
     cout << "Built the tree" << endl;
 
-    showMainMenu();
-
-
-    cout << "Please enter one of the following options: ";
-    cin >> option;
-
-    int op;
-    while(option != QUIT){
+    do {
+        
+        // Show the main menu to the user
+        showMainMenu();
+        cout << "Please enter one of the following options: ";
+        cin >> option;
         
         if(option == 1){
             cout << "Values inside the tree: " << endl;
@@ -160,7 +222,7 @@ int main(int argc, char* argv[]){
             cout << "Enter value to insert: ";
             cin >> item;
 
-            insertTree(root, item);
+            insertNode(root, item);
             
             cout << "Enter 0 to return to main menu: ";
             cin >> op; 
@@ -168,10 +230,7 @@ int main(int argc, char* argv[]){
             option = QUIT;
         }
 
-        showMainMenu();
-        cout << "Please enter one of the following options: ";
-        cin >> option;
-    }
+    } while(option != QUIT);
 
     delete root;
     return 0;
