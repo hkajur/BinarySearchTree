@@ -218,9 +218,13 @@ int main(int argc, char* argv[]){
         
         // Show the main menu to the user
         showMainMenu();
+        
         cout << "Please enter one of the following options: ";
         cin >> option;
-        
+       
+        cin.clear();
+        cin.ignore(10000, '\n');
+
         if(option == 1){
             cout << "Values inside the tree: " << endl;
             inOrderTraversal(root);
@@ -231,6 +235,7 @@ int main(int argc, char* argv[]){
 
             cin.clear();
             cin.ignore(10000, '\n');
+
         } else if(option == 2){
 
             cout << "Values inside the tree: " << endl;
@@ -242,6 +247,7 @@ int main(int argc, char* argv[]){
 
             cin.clear();
             cin.ignore(10000, '\n');
+
         } else if(option == 3){
 
             cout << "Values inside the tree: " << endl;
@@ -253,6 +259,7 @@ int main(int argc, char* argv[]){
 
             cin.clear();
             cin.ignore(10000, '\n');
+
         } else if(option == 4){
    
             int item;
@@ -269,7 +276,9 @@ int main(int argc, char* argv[]){
 
             cin.clear();
             cin.ignore(10000, '\n');
+
         } else if(option == 5){
+        
             int item;
             cout << "Enter value to insert: ";
             cin >> item;
@@ -281,6 +290,7 @@ int main(int argc, char* argv[]){
             
             cin.clear();
             cin.ignore(10000, '\n');
+            
         } else {
             option = QUIT;
         }
