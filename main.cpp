@@ -229,6 +229,8 @@ int main(int argc, char* argv[]){
             cout << "Enter 0 to return to main menu: ";
             cin >> op; 
 
+            cin.clear();
+            cin.ignore(10000, '\n');
         } else if(option == 2){
 
             cout << "Values inside the tree: " << endl;
@@ -238,6 +240,8 @@ int main(int argc, char* argv[]){
             cout << "Enter 0 to return to main menu: ";
             cin >> op; 
 
+            cin.clear();
+            cin.ignore(10000, '\n');
         } else if(option == 3){
 
             cout << "Values inside the tree: " << endl;
@@ -247,6 +251,8 @@ int main(int argc, char* argv[]){
             cout << "Enter 0 to return to main menu: ";
             cin >> op; 
 
+            cin.clear();
+            cin.ignore(10000, '\n');
         } else if(option == 4){
    
             int item;
@@ -261,6 +267,8 @@ int main(int argc, char* argv[]){
             cout << "Enter 0 to return to main menu: ";
             cin >> op; 
 
+            cin.clear();
+            cin.ignore(10000, '\n');
         } else if(option == 5){
             int item;
             cout << "Enter value to insert: ";
@@ -270,6 +278,9 @@ int main(int argc, char* argv[]){
             
             cout << "Enter 0 to return to main menu: ";
             cin >> op; 
+            
+            cin.clear();
+            cin.ignore(10000, '\n');
         } else {
             option = QUIT;
         }
