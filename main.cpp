@@ -8,7 +8,7 @@ using namespace std;
 // QUIT will be a constant variable so if I decided to change
 // the value of quit from 4 to 5, it will be easier
 
-const int QUIT = 4;
+const int QUIT = 6;
 
 // Declaring functions to be later used in program
 
@@ -152,6 +152,22 @@ void inOrderTraversal(btree * root){
     }
 }
 
+void preOrderTraversal(btree * root){
+    if(root != NULL){
+        cout << root->getValue()  << " " ;
+        preOrderTraversal(root->getLeft());
+        preOrderTraversal(root->getRight());
+    }
+}
+
+void postOrderTraversal(btree * root){
+    if(root != NULL){
+        postOrderTraversal(root->getLeft());
+        postOrderTraversal(root->getRight());
+        cout << root->getValue()  << " " ;
+    }
+}
+
 /*
  * showMainMenu function
  * =====================
@@ -164,9 +180,11 @@ void showMainMenu(){
     cout << "##########################################" << endl;
     cout << "\t" << "Main Menu" << endl;
     cout << "1. Inorder traversal" << endl;
-    cout << "2. Search item in tree" << endl;
-    cout << "3. Insert item in tree" << endl;
-    cout << "4. Quit" << endl;
+    cout << "2. Preorder traversal" << endl;
+    cout << "3. Postorder traversal" << endl;
+    cout << "4. Search item in tree" << endl;
+    cout << "5. Insert item in tree" << endl;
+    cout << "6. Quit" << endl;
     cout << "##########################################" << endl;
     cout << endl;
     cout << endl;
@@ -212,6 +230,24 @@ int main(int argc, char* argv[]){
             cin >> op; 
 
         } else if(option == 2){
+
+            cout << "Values inside the tree: " << endl;
+            preOrderTraversal(root);
+            cout << endl;
+            
+            cout << "Enter 0 to return to main menu: ";
+            cin >> op; 
+
+        } else if(option == 3){
+
+            cout << "Values inside the tree: " << endl;
+            postOrderTraversal(root);
+            cout << endl;
+            
+            cout << "Enter 0 to return to main menu: ";
+            cin >> op; 
+
+        } else if(option == 4){
    
             int item;
             cout << "Enter value to search: ";
@@ -225,7 +261,7 @@ int main(int argc, char* argv[]){
             cout << "Enter 0 to return to main menu: ";
             cin >> op; 
 
-        } else if(option == 3){
+        } else if(option == 5){
             int item;
             cout << "Enter value to insert: ";
             cin >> item;
