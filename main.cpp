@@ -221,7 +221,10 @@ int main(int argc, char* argv[]){
         
         cout << "Please enter one of the following options: ";
         cin >> option;
-       
+      
+        // Clears the user input so if user enters string instead of integer
+        // This will handle it
+
         cin.clear();
         cin.ignore(10000, '\n');
 
@@ -230,36 +233,18 @@ int main(int argc, char* argv[]){
             inOrderTraversal(root);
             cout << endl;
             
-            cout << "Enter 0 to return to main menu: ";
-            cin >> op; 
-
-            cin.clear();
-            cin.ignore(10000, '\n');
-
         } else if(option == 2){
 
             cout << "Values inside the tree: " << endl;
             preOrderTraversal(root);
             cout << endl;
             
-            cout << "Enter 0 to return to main menu: ";
-            cin >> op; 
-
-            cin.clear();
-            cin.ignore(10000, '\n');
-
         } else if(option == 3){
 
             cout << "Values inside the tree: " << endl;
             postOrderTraversal(root);
             cout << endl;
             
-            cout << "Enter 0 to return to main menu: ";
-            cin >> op; 
-
-            cin.clear();
-            cin.ignore(10000, '\n');
-
         } else if(option == 4){
    
             int item;
@@ -270,13 +255,7 @@ int main(int argc, char* argv[]){
                 cout << item << " is inside the tree" << endl;
             else
                 cout << item << " is not inside the tree" << endl;
-            
-            cout << "Enter 0 to return to main menu: ";
-            cin >> op; 
-
-            cin.clear();
-            cin.ignore(10000, '\n');
-
+        
         } else if(option == 5){
         
             int item;
@@ -285,14 +264,19 @@ int main(int argc, char* argv[]){
 
             insertNode(root, item);
             
-            cout << "Enter 0 to return to main menu: ";
-            cin >> op; 
-            
-            cin.clear();
-            cin.ignore(10000, '\n');
-            
         } else {
             option = QUIT;
+        }
+      
+        if(option != QUIT){
+            
+            cout << "Enter 0 to return to main menu: ";
+            cin >> op; 
+
+            // Clears the user input so if user enters string instead of integer
+            // This will handle it
+            cin.clear();
+            cin.ignore(10000, '\n');
         }
 
     } while(option != QUIT);
